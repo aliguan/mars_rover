@@ -121,3 +121,5 @@ function moveRover() {
         }
         console.log("New Rover Position: [" + myRover.position[0] + ", " + myRover.position[1] + "]");
 }
+
+// done
