@@ -41,9 +41,22 @@ function goBackward(rover) {
 }
 
 function grid() {
-    if (myRover.position[0] > 9) {
-        myRover.position[0] == 0;
-    }
+    if (myRover.position[0] > 10)
+	{
+		myRover.position[0] = 0;
+	}
+	if (myRover.position[0] < 0)
+	{
+		myRover.position[0] = 10;
+	}
+	if (myRover.position[1] > 10)
+	{
+		myRover.position[1] = 0;
+	}
+	if (myRover.position[1] < 0)
+	{
+		myRover.position[1] = 10;
+	}
 }
 
 function moveRover() {
@@ -51,9 +64,11 @@ function moveRover() {
         for(i = 0; i < roverCommands.length; i ++) {
             if (roverCommands[i] == 'f') {
                 goForward(myRover);
+                grid();
             }
             else if (roverCommands[i] == 'b') {
                 goBackward(myRover);
+                grid();
             }
             else if (roverCommands[i] == 'r' ) {
                 switch(myRover.direction) {
@@ -72,8 +87,10 @@ function moveRover() {
                 };
                 if (roverCommands[i + 1] == 'f' ) {
                     goForward(myRover);
+                    grid();
                 } else if (roverCommands[i + 1] == 'b' ) {
                     goBackward(myRover);
+                    grid();
                 }
                 i++;
             }
@@ -94,8 +111,10 @@ function moveRover() {
                 };
                 if (roverCommands[i + 1] == 'f' ) {
                     goForward(myRover);
+                    grid();
                 } else if (roverCommands[i + 1] == 'b' ) {
                     goBackward(myRover);
+                    grid();
                 }
                 i++;
             }
