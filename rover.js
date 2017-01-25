@@ -3,6 +3,9 @@ var myRover = {
   direction: 'N'
 };
 
+console.log("Original Rover Position: [" + myRover.position[0] + ", " + myRover.position[1] + "]");
+
+
 function goForward(rover) {
   switch(rover.direction) {
     case 'N':
@@ -19,17 +22,38 @@ function goForward(rover) {
       break;
   };
 }
-console.log("Original Rover Position: [" + myRover.position[0] + ", " + myRover.position[1] + "]");
 
+function goBackward(rover) {
+  switch(rover.direction) {
+    case 'N':
+      rover.position[0]--
+      break;
+    case 'E':
+      rover.position[1]--
+      break;
+    case 'S':
+      rover.position[0]++
+      break;
+    case 'W':
+      rover.position[1]++
+      break;
+  };
+}
+
+function grid() {
+    if (myRover.position[0] > 9) {
+        myRover.position[0] == 0;
+    }
+}
 
 function moveRover() {
     var roverCommands = document.getElementById('userInput').value;
         for(i = 0; i < roverCommands.length; i ++) {
-            if (roverCommands[i] == 'f' ) {
-                myRover.position[0] ++;
+            if (roverCommands[i] == 'f') {
+                goForward(myRover);
             }
             else if (roverCommands[i] == 'b') {
-                myRover.position[0] --;
+                goBackward(myRover);
             }
             else if (roverCommands[i] == 'r' ) {
                 switch(myRover.direction) {
@@ -46,7 +70,12 @@ function moveRover() {
                     myRover.direction = 'N'
                     break;
                 };
-                goForward(myRover);
+                if (roverCommands[i + 1] == 'f' ) {
+                    goForward(myRover);
+                } else if (roverCommands[i + 1] == 'b' ) {
+                    goBackward(myRover);
+                }
+                i++;
             }
             else if (roverCommands[i] == 'l' ) {
                 switch(myRover.direction) {
@@ -63,7 +92,12 @@ function moveRover() {
                     myRover.direction = 'S'
                     break;
                 };
-                goForward(myRover);
+                if (roverCommands[i + 1] == 'f' ) {
+                    goForward(myRover);
+                } else if (roverCommands[i + 1] == 'b' ) {
+                    goBackward(myRover);
+                }
+                i++;
             }
         }
         console.log("New Rover Position: [" + myRover.position[0] + ", " + myRover.position[1] + "]");
